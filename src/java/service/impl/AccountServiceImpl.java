@@ -48,8 +48,12 @@ public class AccountServiceImpl implements AccountService {
         dao.deleteFollow(follower, followee);
     }
     
-    public List<Account> search(String name){
-        return dao.search(name);
+    public List<Account> search(String name,long id){
+        return dao.search(name,id);
+    }
+    
+    public boolean isFollowed(long id1,long id2){
+        return dao.isFollowed(id1, id2);
     }
 
 }

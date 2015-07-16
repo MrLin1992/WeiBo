@@ -31,6 +31,7 @@
 
     </head>
     <body>
+        ${sessionScope.account.name}+++++++++++++++++==<br/>
         <a href="FollowServlet">follow</a><br/>
         <textarea id="textarea1" rows="5" cols="60" name="messageContent"></textarea><br/><br/>
         <button id="button1" style="position: relative;left:220px"> 发布</button>  
@@ -39,6 +40,6 @@
         <div id="div1"></div>
         <p>--------------------------------</p>
 
-        <input value="百度" type="button" onClick="window.open('messageDetal.jsp')">
+        <a href="LogOutServlet">退出</a>
     </body>
 </html>

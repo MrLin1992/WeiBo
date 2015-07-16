@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Message {
 
     private long id;
@@ -7,6 +10,8 @@ public class Message {
     private String accountName;
     private String content;
     private boolean isDeleted;
+    private long forwardMessageId;
+    private List<Message> forwardMessageList = new ArrayList();
 
     public void setId(long id) {
         this.id = id;
@@ -14,6 +19,14 @@ public class Message {
 
     public long getId() {
         return id;
+    }
+
+    public void setForwardMessageId(long forwardMessageId) {
+        this.forwardMessageId = forwardMessageId;
+    }
+
+    public long getForwardMessageId() {
+        return forwardMessageId;
     }
 
     public void setAccountId(long accountId) {
@@ -47,4 +60,13 @@ public class Message {
     public boolean getIsDeleted() {
         return this.isDeleted;
     }
+
+    public void setForwardMessageList(List<Message> forwardMessageList) {
+        this.forwardMessageList = forwardMessageList;
+    }
+
+    public List<Message> getForwardMessageList() {
+        return forwardMessageList;
+    }
+
 }

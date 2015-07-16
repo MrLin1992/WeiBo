@@ -16,11 +16,14 @@
         <c:forEach var="m" items="${requestScope.commentList}">
             ${m.accountName}:
             ${m.content}
-            <button id="button_delete_comment_${m.id}" value="${m.id}">delete</button><br/>
+            <c:if test="${m.accountId == account.id}">
+                <button id="button_delete_comment_${m.id}" value="${m.id}">delete</button>
+            </c:if>
+            <br/>
             <script type="text/javascript">
                 $(document).ready(function () {
-                $("#button_delete_comment_${m.id}").click(function () {
-                    $("#div2").load("DeleteComment", {comment_id:${m.id},message_id:${m.messageId}});
+                    $("#button_delete_comment_${m.id}").click(function () {
+                        $("#div2").load("DeleteComment", {comment_id:${m.id}, message_id:${m.messageId}});
                     });
                 });
             </script>

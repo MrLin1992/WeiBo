@@ -9,7 +9,10 @@
     <body>
         <h1>serach result</h1><br/>
         <c:forEach var="m" items="${requestScope.searchResult}">
-            ${m.name} <br/>
+        
+            <a href="AccountDetailServlet?user_id=${m.id}&user_name=${m.name}"> ${m.name}</a> <br/>
+     
         </c:forEach>
+        ${requestScope.errorMessage}
     </body>
 </html>

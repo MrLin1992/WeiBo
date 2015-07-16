@@ -23,6 +23,8 @@ public class LogOutServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.removeAttribute("account");

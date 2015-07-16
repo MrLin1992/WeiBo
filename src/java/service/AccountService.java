@@ -14,6 +14,12 @@ public interface AccountService {
     
     public List<Account> followerList(long id);
     
-    public List<Account> search(String name);
+    public List<Account> search(String name,long id);
+    
+    public boolean isFollowed(long id1,long id2);
+    
+    public void addFollow(long follower, long followee);
+    
+    public void deleteFollow(long follower, long followee);
     
 }

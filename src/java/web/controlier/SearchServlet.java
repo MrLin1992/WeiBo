@@ -5,6 +5,7 @@
  */
 package web.controlier;
 
+import domain.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,7 +25,11 @@ import service.impl.AccountServiceImpl;
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         AccountService service = new AccountServiceImpl();
+        Account account = (Account) request.getSession().getAttribute("account");
+        long id = account.getId();
         String name = request.getParameter("search");
         String errors = null;
         if(name == null || name.trim().equals("")){
@@ -33,7 +38,7 @@ public class SearchServlet extends HttpServlet {
             request.getRequestDispatcher("searchResult.jsp").forward(request, response); 
             return ;
         }
-        List list = service.search(name);
+        List list = service.search(name,id);
         if(list.isEmpty()){
             errors = "查无此人！";
             request.setAttribute("errorMessage", errors);

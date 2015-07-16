@@ -30,11 +30,6 @@ public class RegisterServlet extends HttpServlet {
         if(name == null || name.trim().equals("")){
             isOK = false;
             errors.put("name","姓名不能为空！");
-        }else{
-            if(!name.matches("[A-Za-z]{3,8}")){
-                isOK = false;
-                errors.put("name","姓名需是3-8位字母");
-            }   
         }
         
         if(password == null || password.trim().equals("")){

@@ -6,50 +6,42 @@
 package web.controlier;
 
 import domain.Account;
-import domain.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import service.MessageService;
-import service.impl.MessageServiceImpl;
+import service.AccountService;
+import service.impl.AccountServiceImpl;
 
 /**
  *
  * @author linshangzhen
  */
-@WebServlet(name = "PublishServlet", urlPatterns = {"/PublishServlet"})
-public class PublishServlet extends HttpServlet {
+@WebServlet(name = "IsFollowServlet", urlPatterns = {"/IsFollowServlet"})
+public class IsFollowServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String content = request.getParameter("messageContent");
-
-        Message message = new Message();
         Account account = (Account) request.getSession().getAttribute("account");
-        long accountId = account.getId();
-        message.setAccountId(accountId);
-        message.setContent(content);
-        MessageService service = new MessageServiceImpl();
-        service.publish(message);
-        
-        List list = service.homeList(accountId);
-        request.setAttribute("messageList", list);
-        request.getRequestDispatcher("messageList.jsp").forward(request, response);
-
+        long follower = account.getId();
+        String followeeString = request.getParameter("user_id");
+        long followee = Long.parseLong(followeeString);
+        AccountService service = new AccountServiceImpl();
+        boolean isFollowed = service.isFollowed(followee, follower);
+        System.out.println(isFollowed);
+  
+        request.setAttribute("is_followed", isFollowed);
+        request.setAttribute("user_id", followee);
+        request.getRequestDispatcher("followButton.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
-
 }

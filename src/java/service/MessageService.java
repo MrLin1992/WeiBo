@@ -11,4 +11,8 @@ public interface MessageService {
 
     void publish(Message message);
     
+    public List<Message> userList(long id);
+    
+    public void forward(Message message);
+    
 }

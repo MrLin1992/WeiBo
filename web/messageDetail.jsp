@@ -25,15 +25,22 @@
             });
 
         </script>
+
     </head>
     <body>
         ${message_account}+++++++++++++++++++++${message_content}
         <h1>Message Detail</h1>
-        
+
         ----------------------------------------------------<br>
-        <textarea id="textarea2" rows="5" cols="60" name="commentContent"></textarea><br/><br/>
-        <button id="button2" style="position: relative;left:220px"> 评论</button> ${message_id}<br/>
-        +++++++++++++++++++++++++++++++++++++++++
-        <div id="div2"> </div>
+
+        <form action="ForwardServlet?message_id=${message_id}" method="post">
+            <textarea id="textarea2" rows="5" cols="60" name="message_content"></textarea>  <br/>        
+            <input type="submit" value="转发"> </input>
+             
+        </form>
+           <button id="button2"> 评论</button>
+            <br/>
+            +++++++++++++++++++++++++++++++++++++++++
+            <div id="div2"> </div>
     </body>
 </html>

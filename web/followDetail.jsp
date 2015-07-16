@@ -19,14 +19,18 @@
         <h1>Follow Detail</h1>
     <h>我的关注</h><br/>
         <c:forEach var="m" items="${requestScope.followee_list}">
+        <a href="AccountDetailServlet?user_id=${m.id}&user_name=${m.name}">
             ${m.name}<br/>
+        </a>
     </c:forEach>
     ++++++++++++++++++++++++++++++++++++++<br/>
     <h>我的粉丝</h><br/>
         <c:forEach var="n" items="${requestScope.follower_list}">
+        <a href="AccountDetailServlet?user_id=${n.id}&user_name=${n.name}">
             ${n.name}<br/>
+        </a>
     </c:forEach>
-
+    <br/><br/><br/>
     <input id="input1" type="text">
     <button id="button3">搜索</button>
 

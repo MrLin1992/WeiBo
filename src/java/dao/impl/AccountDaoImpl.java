@@ -137,9 +137,9 @@ public class AccountDaoImpl implements AccountDao {
                 a.setName(rs.getString(2));
                 list.add(a);
             }
-            
+
             System.out.println("test_dao");
-            
+
             return list;
 
         } catch (Exception ex) {
@@ -179,25 +179,26 @@ public class AccountDaoImpl implements AccountDao {
 
         return null;
     }
-    
-    public List<Account> search(String name){
+
+    public List<Account> search(String name, long id) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = JdbcUtils.getConnection();
-            Object[] para = new Object[]{"%c%"};
-            
             String sql = "select id,name from account where name like '%'||?||'%'";
             st = conn.prepareStatement(sql);
-            st.setString(1,name);
+            st.setString(1, name);
             rs = st.executeQuery();
             List list = new ArrayList();
             while (rs.next()) {
                 Account a = new Account();
                 a.setId(rs.getLong(1));
                 a.setName(rs.getString(2));
-                list.add(a);
+                if (rs.getLong(1) != id) {
+                    list.add(a);
+                }
+
             }
             return list;
 
@@ -208,5 +209,29 @@ public class AccountDaoImpl implements AccountDao {
         }
 
         return null;
+    }
+
+    public boolean isFollowed(long id1, long id2) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = JdbcUtils.getConnection();
+            String sql = "select * from follow where (follower=? and followee=?)";
+            st = conn.prepareStatement(sql);           
+            st.setLong(1, id2);
+            st.setLong(2, id1);          
+            rs = st.executeQuery();
+            if(rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MessageDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JdbcUtils.release(conn, st, rs);
+        }
+        return false;
     }
 }

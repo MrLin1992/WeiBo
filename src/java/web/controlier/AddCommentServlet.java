@@ -17,6 +17,8 @@ import service.impl.CommentServiceImpl;
 public class AddCommentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         CommentService service = new CommentServiceImpl();
         Comment comment = new Comment();
         Account account = (Account) request.getSession().getAttribute("account");

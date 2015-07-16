@@ -19,6 +19,8 @@ public interface AccountDao {
     
     public List<Account> getFollowerList(long id);
     
-    public List<Account> search(String name);
+    public List<Account> search(String name,long id);
+    
+    public boolean isFollowed(long id1, long id2);
 
 }

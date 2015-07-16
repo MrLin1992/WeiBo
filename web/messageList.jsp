@@ -13,9 +13,31 @@
         <h1>Message List</h1>
         <c:forEach var="m" items="${requestScope.messageList}">
 
-            ${m.accountName}:
+
+
+            <br/>********************************<br/>
+
+            <c:if test="${m.accountId != account.id}">
+                <strong> <a href="AccountDetailServlet?user_id=${m.accountId}&user_name=${m.accountName}"> ${m.accountName}</a></strong><br/>
+            </c:if>   
+            <c:if test="${m.accountId == account.id}">
+                <strong> <a href="home.jsp">${m.accountName}</a></strong><br/>
+            </c:if> 
+
             ${m.content}
-            <button id="button_delete_${m.id}" class="delete" value="${m.id}">delete</button>
+
+            <c:forEach var="n" items="${m.forwardMessageList}">
+                <c:if test="${n.accountId != account.id}">
+                    //<a href="AccountDetailServlet?user_id=${n.accountId}&user_name=${n.accountName}">@${n.accountName}</a> : ${n.content}
+                </c:if>   
+                <c:if test="${n.accountId == account.id}">
+                    //<a href="home.jsp">@${n.accountName}</a> : ${n.content}
+                </c:if>     
+            </c:forEach>  <br/>
+            <c:if test="${m.accountId == account.id}">
+                <button id="button_delete_${m.id}" class="delete" value="${m.id}">delete</button>
+            </c:if>       
+
             <a href="MessageDetailServlet?message_id=${m.id}&message_content=${m.content}&message_account=${m.accountName}">detail</a><br/>
             <script type="text/javascript">
                 $(document).ready(function () {

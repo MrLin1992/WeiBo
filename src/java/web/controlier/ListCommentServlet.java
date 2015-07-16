@@ -25,6 +25,8 @@ public class ListCommentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String messageIdString = request.getParameter("message_id");
 
         long messageId = Long.parseLong(messageIdString);

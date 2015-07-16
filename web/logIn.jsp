@@ -18,8 +18,8 @@
             密码:<input style="width:160px" type="password" name="password">
             <span>${logInErrors.password }</span></br>
             
-        <input style="position: relative;left:80px" type="submit" value="登录"> 
-        
+        <input style="position: relative;left:80px" type="submit" value="登录"> <br/><br/>
+        <a href="register.jsp">注册</a>
         </form>
     </body>
 </html>

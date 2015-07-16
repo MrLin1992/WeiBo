@@ -20,4 +20,9 @@ public interface MessageDao {
 
     List<Message> getAll(long id);
     
+    public List<Message> userList(long id);
+    
+    public void Forward(Message message);
+    
+    public Message find(long id);
 }

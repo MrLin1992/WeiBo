@@ -13,9 +13,9 @@
     </head>
     <body>
         <form action="RegisterServlet" method="post"> 
-            邮箱：<input style="width:160px" type="text" name="name">
+            姓名：<input style="width:160px" type="text" name="name">
             <span>${registerErrors.email }</span></br>
-            姓名：<input style="width:160px" type="text" name="email">
+            邮箱：<input style="width:160px" type="text" name="email">
             <span>${registerErrors.name }</span></br>
             密码：<input style="width:160px" type="password" name="password">
             <span>${registerErrors.password }</span></br>
