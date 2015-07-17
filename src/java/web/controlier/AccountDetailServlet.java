@@ -25,6 +25,7 @@ import service.impl.MessageServiceImpl;
  */
 @WebServlet(name = "AccountDetailServlet", urlPatterns = {"/AccountDetailServlet"})
 public class AccountDetailServlet extends HttpServlet {
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -33,20 +34,17 @@ public class AccountDetailServlet extends HttpServlet {
         long userId = Long.parseLong(userIdString);
         String userName = request.getParameter("user_name");
         Account account = (Account) request.getSession().getAttribute("account");
-        long id = account.getId();      
+        long id = account.getId();
         MessageService service = new MessageServiceImpl();
         List list = service.userList(userId);
         request.setAttribute("messageList", list);
         request.setAttribute("user_name", userName);
         request.setAttribute("user_id", userId);
-        
         request.getRequestDispatcher("accountDetail.jsp").forward(request, response);
-        
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 }
-
-  

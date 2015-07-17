@@ -95,7 +95,7 @@ public class MessageDaoImpl implements MessageDao  {
         ResultSet rs = null;
         try {
             conn = JdbcUtils.getConnection();
-            String sql = "select id,content,is_deleted from message where account_id =? order by id DESC";
+            String sql = "select message.id,message.account_id,account.name,message.content,message.forward_message_id,is_deleted from account right join message on account.id=message.account_id where account.id=?";          
             st = conn.prepareStatement(sql);
             st.setLong(1, id);
             rs = st.executeQuery();
@@ -103,8 +103,11 @@ public class MessageDaoImpl implements MessageDao  {
             while (rs.next()) {
                 Message m = new Message();
                 m.setId(rs.getLong(1));
-                m.setContent(rs.getString(2));
-                if (!rs.getBoolean(3)) {
+                m.setAccountId(rs.getLong(2));
+                m.setAccountName(rs.getString(3));
+                m.setContent(rs.getString(4));
+                m.setForwardMessageId(rs.getLong(5));
+                if (!rs.getBoolean(6)) {
                     list.add(m);
                 }
             }

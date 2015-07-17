@@ -5,6 +5,7 @@
  */
 package web.controlier;
 
+import domain.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.MessageService;
+import service.impl.MessageServiceImpl;
 
 /**
  *
@@ -27,6 +30,9 @@ public class MessageDetailServlet extends HttpServlet {
         long messageId = Long.parseLong(messageIdString);
         String content = request.getParameter("message_content");
         String account = request.getParameter("message_account");
+        MessageService service = new MessageServiceImpl();
+        Message messageForDetail = service.find(messageId);
+        request.setAttribute("message_for_detail", messageForDetail);
         request.setAttribute("message_id", messageId);
         request.setAttribute("message_content", content);
         request.setAttribute("message_account", account);

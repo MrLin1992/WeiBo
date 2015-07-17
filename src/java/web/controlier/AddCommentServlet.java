@@ -15,6 +15,7 @@ import service.impl.CommentServiceImpl;
 
 @WebServlet(name = "AddCommentServlet", urlPatterns = {"/AddCommentServlet"})
 public class AddCommentServlet extends HttpServlet {
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -24,24 +25,21 @@ public class AddCommentServlet extends HttpServlet {
         Account account = (Account) request.getSession().getAttribute("account");
         long accountId = account.getId();
         String messageIdString = request.getParameter("message_id");
-        long messageId = Long.parseLong(messageIdString);        
+        long messageId = Long.parseLong(messageIdString);
         String content = request.getParameter("commentContent");
         comment.setAccountId(accountId);
         comment.setMessageId(messageId);
         comment.setContent(content);
         service.add(comment);
-        
-        List list = service.CommentList(messageId);       
+        List list = service.CommentList(messageId);
         request.setAttribute("commentList", list);
         request.getRequestDispatcher("commentList.jsp").forward(request, response);
-     
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-    
-    
-}
 
-   
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}

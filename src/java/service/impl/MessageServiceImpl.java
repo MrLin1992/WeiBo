@@ -24,7 +24,21 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public List<Message> userList(long id) {
-        return dao.userList(id);
+        List<Message> tempList = dao.userList(id);
+        List<Message> newList = new ArrayList();
+
+        for (int i = 0; i < tempList.size(); i++) {
+            Message m1 = tempList.get(i);
+            long forwardId = m1.getForwardMessageId();
+            while (forwardId != 0) {
+                Message m2 = dao.find(forwardId);
+                List<Message> listtest = m1.getForwardMessageList();
+                m1.getForwardMessageList().add(m2);
+                forwardId = m2.getForwardMessageId();
+            }
+            newList.add(m1);
+        }
+        return newList;
     }
 
     public void forward(Message message) {
@@ -39,14 +53,24 @@ public class MessageServiceImpl implements MessageService {
         for (int i = 0; i < tempList.size(); i++) {
             Message m1 = tempList.get(i);
             long forwardId = m1.getForwardMessageId();
-            while(forwardId!=0){
-                Message m2 = dao.find(forwardId);              
-                List<Message> listtest = m1.getForwardMessageList();
-                m1.getForwardMessageList().add(m2);               
+            while (forwardId != 0) {
+                Message m2 = dao.find(forwardId);
+                m1.getForwardMessageList().add(m2);
                 forwardId = m2.getForwardMessageId();
             }
             newList.add(m1);
         }
         return newList;
+    }
+    
+    public Message find(long id){
+        Message tempMessage = dao.find(id);
+        long forwardId = tempMessage.getForwardMessageId();
+        while (forwardId != 0) {
+                Message m2 = dao.find(forwardId);
+                tempMessage.getForwardMessageList().add(m2);
+                forwardId = m2.getForwardMessageId();
+            }
+        return tempMessage;
     }
 }

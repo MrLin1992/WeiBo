@@ -7,12 +7,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>serach result</h1><br/>
-        <c:forEach var="m" items="${requestScope.searchResult}">
-        
-            <a href="AccountDetailServlet?user_id=${m.id}&user_name=${m.name}"> ${m.name}</a> <br/>
-     
-        </c:forEach>
-        ${requestScope.errorMessage}
+        <div class="well">
+            <h4>搜索结果:</h4>
+            <c:forEach var="m" items="${requestScope.searchResult}">
+
+                <a href="AccountDetailServlet?user_id=${m.id}&user_name=${m.name}"> ${m.name}</a> <br/>
+
+            </c:forEach>
+            <p style="text-align: center;">${requestScope.errorMessage}</p>
+        </div>
     </body>
 </html>

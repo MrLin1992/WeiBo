@@ -29,7 +29,7 @@ public class LogOutServlet extends HttpServlet {
         if (session != null) {
             session.removeAttribute("account");
         }
-        response.sendRedirect("logIn.jsp");
+        response.sendRedirect("index.html");
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

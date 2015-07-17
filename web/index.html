@@ -1,43 +1,24 @@
-<!DOCTYPE html>
-
-
 <html>
-<head>
-<script src="jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $(".ex .hide").click(function(){
-    $(this).parents(".ex").hide("slow");
-  });
-});
-</script>
-<style type="text/css"> 
-div.ex
-{
-background-color:#e5eecc;
-padding:7px;
-border:solid 1px #c3c3c3;
-}
-</style>
-</head>
- 
-<body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    </head>
 
-<h3>d</h3>
-<div class="ex">
-<button class="hide" type="button">d</button>
-<p>联系人：张先生<br /> 
-北三环中路 100 号<br />
-北京</p>
-</div>
+    <body>
+        <br/><br/><br/><br/><br/><br/>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="jumbotron">
 
-<h3>美国办事处</h3>
-<div class="ex">
-<button class="hide" type="button">隐藏</button>
-<p>联系人：David<br /> 
-第五大街 200 号<br />
-纽约</p>
-</div>
+                    <h2 style="text-align:center;">欢迎来到高大上的微博</h2>
+                    <br/><br/><br/>
+                    <a class="btn btn-primary btn-lg" style="position: relative;left:200px" href="logIn.jsp" role="button">登录</a>
+                    <a class="btn btn-primary btn-lg" style="position: relative;left:280px" href="register.jsp" role="button">注册</a>
 
-</body>
+                </div>
+                <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+                <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+            </div>
+        </div>
+    </body>
 </html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home
-    Created on : Jul 14, 2015, 2:06:29 PM
+    Document   : test
+    Created on : Jul 16, 2015, 8:47:47 PM
     Author     : linshangzhen
 --%>
 
@@ -8,25 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#div1").load("ListMessageServlet");
-
-            });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#button1").click(function () {
-                    message = $("#textarea1").val();
-                    $("#div1").load("PublishServlet", {messageContent: message});
-                });
-            });
-        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
-
+        <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <title>JSP Page</title>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -51,17 +35,23 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        <br/><br/><br/><br/>
-        <div class="row">
-            <div id="div1" class="col-md-6 col-md-offset-1">
+
+        <div class="jumbotron">
+            <br/><br/>
+            <h1 style="position:relative;left: 100px;display: inline;">${user_name}</h1>
+            <div id="div4" style="float: right"></div>
+        </div>
+    <c:forEach var="m" items="${requestScope.messageList}">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">${user_name}</h3>
             </div>
-            <div class="col-md-2 col-md-offset-0">
-                <br/><br/>
-                <textarea id="textarea1" class="form-control" rows="5" name="messageContent"></textarea><br/>
-                <button id="button1" class="btn btn-sm btn-primary" style="float: right;"> 发布</button>  
+            <div class="panel-body">
+                ${m.content} <br/>
+                <a href="MessageDetailServlet?message_id=${m.id}&message_content=${m.content}&message_account=${user_name}">detail</a><br/>
             </div>
         </div>
+    </c:forEach>
 
-
-    </body>
+</body>
 </html>

@@ -29,14 +29,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h3>关注/取关</h3>
-
         <c:if test="${is_followed}">
-            <button id="delete_follow">取关</button>
+            <button class="btn btn-danger btn-lg" id="delete_follow">取关</button>
              
         </c:if>
         <c:if test="${!is_followed}">
-            <button id="add_follow">关注</button>
+            <button class="btn btn-success btn-lg" id="add_follow">关注</button>
             
         </c:if>
         

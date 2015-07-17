@@ -52,7 +52,7 @@ public class LogInServlet extends HttpServlet {
             response.sendRedirect("home.jsp");
             return;
         }
-        errors.put("name", "账号或姓名错误！");
+        errors.put("name", "账号或密码错误！");
         request.setAttribute("logInErrors", errors);
         request.getRequestDispatcher("logIn.jsp").forward(request, response);
         return;

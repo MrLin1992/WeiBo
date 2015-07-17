@@ -15,4 +15,6 @@ public interface MessageService {
     
     public void forward(Message message);
     
+    public Message find(long id);
+    
 }

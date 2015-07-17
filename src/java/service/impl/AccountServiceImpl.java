@@ -13,7 +13,8 @@ public class AccountServiceImpl implements AccountService {
     private AccountDao dao = new AccountDaoImpl();
 
     public void register(Account account) throws AccountExistException {
-        boolean isRegisterd = dao.find(account.getName());
+        //boolean isRegisterd = dao.find(account.getName());
+        boolean isRegisterd = false;
         if (isRegisterd) {
             throw new AccountExistException();
         } else {
