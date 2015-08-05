@@ -26,6 +26,7 @@ public class LogInServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("+++++++++++++++++++error5++++++++++++++++++++");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         boolean isOK = true;

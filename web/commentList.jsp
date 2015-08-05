@@ -17,7 +17,7 @@
             <div  class="well">
                 <thead><tr><th>
                             ${m.accountName} :
-                            
+
                             ${m.content}
                             <c:if test="${m.accountId == account.id}">
                                 <button id="button_delete_comment_${m.id}" value="${m.id}" class="btn btn-sm btn-primary"  style="float: right">删除</button>
@@ -36,6 +36,6 @@
                 </script>
             </div>
         </c:forEach>
-
+        <!--commentList page jmeter -->
     </body>
 </html>

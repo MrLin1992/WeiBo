@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
-         <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function () {
                 $("#delete_follow").click(function () {
-                    $("#div4").load("DeleteFollowServlet", {user_id: ${user_id}});
+                     $("#div4").load("DeleteFollowServlet", {user_id: ${user_id}});
                 });
             });
         </script>
@@ -31,13 +31,13 @@
     <body>
         <c:if test="${is_followed}">
             <button class="btn btn-danger btn-lg" id="delete_follow">取关</button>
-             
+
         </c:if>
         <c:if test="${!is_followed}">
             <button class="btn btn-success btn-lg" id="add_follow">关注</button>
-            
+
         </c:if>
-        
-       
+
+        <!--follow page jmeter -->
     </body>
 </html>

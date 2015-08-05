@@ -25,13 +25,13 @@ public class NewFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        System.out.println(req.getRequestURI());
+        //System.out.println(req.getRequestURI());
 
         Account account = (Account) req.getSession().getAttribute("account");
 
         if (account == null) {
             String uri = req.getRequestURI();
-            if (uri.equals("/weibo/index.html") || uri.equals("/weibo/logIn.jsp") || uri.equals("/weibo/register.jsp")||uri.contains("LogInServlet")||uri.contains("RegisterServlet")) {
+            if (uri.equals("/weibo/index.html") || uri.equals("/weibo/logIn.jsp") || uri.equals("/weibo/register.jsp")||uri.contains("LogInServlet")||uri.contains("RegisterServlet")||uri.contains("css")) {
                 chain.doFilter(request, response);
             }else{
                   res.sendRedirect("index.html");

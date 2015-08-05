@@ -25,7 +25,7 @@
                     <input type="name" class="form-control" id="inputEmail3" placeholder="Name" name="name">
                 </div>
                 <h5><span class="label label-danger" for="inputEmail3">${logInErrors.name }</span></br>
- 
+
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
@@ -43,7 +43,7 @@
 
 
 
-
+        <!--login page jmeter -->
 
     </body>
 </html>

@@ -62,7 +62,7 @@ public class MessageDaoImpl implements MessageDao  {
         ResultSet rs = null;
         try {
             conn = JdbcUtils.getConnection();
-            String sql = "select account.name,message.content,account.id,message.id,message.forward_message_id,message.is_deleted from account right join follow on account.id=follow.followee right join message on follow.followee=message.account_id where follow.follower=? order by message.id DESC";
+            String sql = "select account.name,message.content,account.id,message.id,message.forward_message_id,message.is_deleted,is_manager_deleted,is_manager_closed from account right join follow on account.id=follow.followee right join message on follow.followee=message.account_id where follow.follower=? order by message.id DESC";
             st = conn.prepareStatement(sql);
             st.setLong(1, id);
             rs = st.executeQuery();
@@ -70,12 +70,16 @@ public class MessageDaoImpl implements MessageDao  {
             while (rs.next()) {
                 Message m = new Message();
                 m.setAccountName(rs.getString(1));
-                m.setContent(rs.getString(2));
+                if(!rs.getBoolean(8)){
+                    m.setContent(rs.getString(2));                   
+                }else{
+                    m.setContent("此微博已被删除");
+                }                
                 m.setAccountId(rs.getLong(3));
                 m.setId(rs.getLong(4));
                 m.setForwardMessageId(rs.getLong(5));
                 
-                if (!rs.getBoolean(6)) {
+                if ((!rs.getBoolean(6))&&(!rs.getBoolean(7))) {
                     list.add(m);
                 }
             }
@@ -95,7 +99,7 @@ public class MessageDaoImpl implements MessageDao  {
         ResultSet rs = null;
         try {
             conn = JdbcUtils.getConnection();
-            String sql = "select message.id,message.account_id,account.name,message.content,message.forward_message_id,is_deleted from account right join message on account.id=message.account_id where account.id=?";          
+            String sql = "select message.id,message.account_id,account.name,message.content,message.forward_message_id,is_deleted,is_manager_deleted,is_manager_closed from account right join message on account.id=message.account_id where account.id=?";          
             st = conn.prepareStatement(sql);
             st.setLong(1, id);
             rs = st.executeQuery();
@@ -105,9 +109,13 @@ public class MessageDaoImpl implements MessageDao  {
                 m.setId(rs.getLong(1));
                 m.setAccountId(rs.getLong(2));
                 m.setAccountName(rs.getString(3));
-                m.setContent(rs.getString(4));
+                if(!rs.getBoolean(8)){
+                    m.setContent(rs.getString(4));                   
+                }else{
+                    m.setContent("此微博已被删除");
+                } 
                 m.setForwardMessageId(rs.getLong(5));
-                if (!rs.getBoolean(6)) {
+                if ((!rs.getBoolean(6))&&(!rs.getBoolean(7))) {
                     list.add(m);
                 }
             }
@@ -126,7 +134,7 @@ public class MessageDaoImpl implements MessageDao  {
         ResultSet rs = null;
         try {
             conn = JdbcUtils.getConnection();
-            String sql="select message.id,message.account_id,account.name,message.content,message.forward_message_id from account right join message on account.id=message.account_id where message.id=?";
+            String sql="select message.id,message.account_id,account.name,message.content,message.forward_message_id,is_manager_closed from account right join message on account.id=message.account_id where message.id=?";
             st = conn.prepareStatement(sql);
             st.setLong(1, id);
             rs = st.executeQuery();
@@ -135,7 +143,11 @@ public class MessageDaoImpl implements MessageDao  {
                 m.setId(rs.getLong(1));
                 m.setAccountId(rs.getLong(2));
                 m.setAccountName(rs.getString(3));
-                m.setContent(rs.getString(4));
+                if(!rs.getBoolean(6)){
+                    m.setContent(rs.getString(4));                   
+                }else{
+                    m.setContent("此微博已被删除");
+                }
                 m.setForwardMessageId(rs.getLong(5));
             }
             return m;
